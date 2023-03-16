@@ -90,9 +90,15 @@ def register(request:HttpRequest):
 
             form.save()
 
-            return redirect()
+            return redirect("success")
 
     context = {"form":form}
 
     return render(request, "register.html", context)
      
+
+
+
+def success(request:HttpRequest):
+
+    return render(request, "success.html")

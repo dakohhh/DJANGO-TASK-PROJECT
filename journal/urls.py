@@ -15,7 +15,9 @@ urlpatterns = [
 
     path("delete_task/<int:id>", views.delete_task, name="delete_task"),
 
-    path("register", views.register, name="register")
+    path("register", views.register, name="register"),
+
+    path("success", views.success, name="success")
 
 
 
