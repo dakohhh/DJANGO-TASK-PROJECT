@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 
 from django.contrib.auth.forms import AuthenticationForm
 from django.forms.widgets import TextInput, PasswordInput
-from django.forms import forms
+from django import forms
 
 
 class TaskForm(ModelForm):
