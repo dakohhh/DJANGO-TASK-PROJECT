@@ -37,6 +37,15 @@ urlpatterns = [
 
     path("my_thought", views.my_thought, name="my_thought"),
 
+    # - Profile Managements
+
+    path("profile_management", views.profile_management, name="profile_management"),
+
+    
+    # - Delete Account
+
+    path("delete_account", views.delete_account, name="delete_account"),
+
 
 
 ] 

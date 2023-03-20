@@ -2,9 +2,12 @@ from django.http import HttpRequest
 
 from django.shortcuts import render, redirect
 
-from . forms import CreateUserForm, LoginForm, ThoughtPostForm, ThoughtUpdateForm
+from . forms import CreateUserForm, LoginForm, ThoughtPostForm, ThoughtUpdateForm, UpdateUserForm
 
 from . models import Thought
+
+from django.contrib.auth.models import User
+
 
 from django.contrib import auth
 from django.contrib.auth import authenticate
@@ -139,7 +142,7 @@ def my_thought(request:HttpRequest):
 
 
 
-
+@login_required(login_url="login")
 def delete_thoght(request:HttpRequest, id:int):
 
     thought = Thought.objects.get(id=id)
@@ -151,6 +154,46 @@ def delete_thoght(request:HttpRequest, id:int):
 
     return render(request, "delete_thought.html")
 
+
+
+
+
+@login_required(login_url="login")
+def profile_management(request:HttpRequest):
+    
+
+    form = UpdateUserForm(instance=request.user)
+
+    if request.method == "POST":
+
+        form = UpdateUserForm(request.POST, instance=request.user)
+
+        if form.is_valid():
+
+
+            form.save()
+
+            return redirect("dashboard")
+        
+    context = {"form":form}
+
+    return render(request, "profile-management.html", context)
+
+
+
+
+@login_required(login_url="login")
+def delete_account(request:HttpRequest):
+    
+    if request.method == "POST":
+
+        user = User.objects.get(username=request.user)
+
+        user.delete()
+
+        return  redirect("login")
+
+    return render(request, "delete_account.html")
 
 
 
