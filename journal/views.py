@@ -2,9 +2,9 @@ from django.http import HttpRequest
 
 from django.shortcuts import render, redirect
 
-from . forms import CreateUserForm, LoginForm, ThoughtPostForm, ThoughtUpdateForm, UpdateUserForm
+from . forms import CreateUserForm, LoginForm, ThoughtPostForm, ThoughtUpdateForm, UpdateUserForm, UpdateProfileForm
 
-from . models import Thought
+from . models import Thought, Profile  
 
 from django.contrib.auth.models import User
 
@@ -15,6 +15,11 @@ from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required
 
 from django.contrib import messages
+
+
+from django.core.mail import send_mail
+
+from django.conf import settings
 
 
 
@@ -28,12 +33,21 @@ def register(request:HttpRequest):
 
     form = CreateUserForm()
 
+    form2 = UpdateProfileForm()
+
     if request.method == "POST":
         form = CreateUserForm(request.POST)
 
         if form.is_valid():
-            form.save()
+
+            current_user = form.save(commit=False)
             
+            form.save()
+
+            send_mail("Welcome to Wisdom Thought", "Congratulations on creating your account!", settings.DEFAULT_FROM_EMAIL, [current_user.email] )
+
+            profile = Profile.objects.create(user=current_user)
+
             messages.success(request, "Congrats your account is created..login now")
         
             return redirect("login")
@@ -74,7 +88,11 @@ def login(request:HttpRequest):
 @login_required(login_url="login")
 def dashboard(request:HttpRequest):
 
-    return render(request, "dashboard.html")
+    profile_pic = Profile.objects.get(user=request.user)
+
+    context = {"profile_pic": profile_pic}
+
+    return render(request, "dashboard.html", context)
 
 
 
@@ -83,6 +101,7 @@ def dashboard(request:HttpRequest):
 def post_thoght(request:HttpRequest):
 
     form = ThoughtPostForm()
+
 
     print(request.user)
 
@@ -164,18 +183,30 @@ def profile_management(request:HttpRequest):
 
     form = UpdateUserForm(instance=request.user)
 
+    profile  = Profile.objects.get(user=request.user)
+
+    form2  = UpdateProfileForm(instance=profile)
+
     if request.method == "POST":
 
         form = UpdateUserForm(request.POST, instance=request.user)
 
-        if form.is_valid():
+        form2  = UpdateProfileForm(request.POST, request.FILES, instance=profile)
 
+
+        if form.is_valid():
 
             form.save()
 
             return redirect("dashboard")
+
+        if form2.is_valid():
+
+            form2.save()
+
+            return redirect("dashboard")
         
-    context = {"form":form}
+    context = {"form":form, "form2":form2}
 
     return render(request, "profile-management.html", context)
 

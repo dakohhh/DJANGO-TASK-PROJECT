@@ -29,7 +29,7 @@ SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["192.168.43.93", "127.0.0.1"]
 
 
 # Application definition
@@ -133,11 +133,39 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = 'static/'
+
+MEDIA_URL = "img/"
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
+
+
+MEDIA_ROOT = BASE_DIR / "static/img"
+
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+
+# SMTP CONFIGURATION
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+
+EMAIL_HOST = os.getenv("MAIL_HOST")
+
+EMAIL_PORT =os.getenv("MAIL_PORT")
+
+EMAIL_USE_TLS = True
+
+EMAIL_HOST_USER = os.getenv("MAIL_USERNAME")
+
+EMAIL_HOST_PASSWORD = os.getenv("MAIL_PASSWORD")
+
+
+DEFAULT_FROM_EMAIL =  os.getenv("MAIL_USERNAME")
+

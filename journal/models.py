@@ -15,3 +15,10 @@ class Thought(models.Model):
     user = models.ForeignKey(User, max_length=10, on_delete=models.CASCADE)
 
 
+
+
+class Profile(models.Model):
+    
+    profile_pic = models.ImageField(null=True, blank=True, default="default.jpg")
+
+    user = models.ForeignKey(User, max_length=10,on_delete=models.CASCADE, null=True )

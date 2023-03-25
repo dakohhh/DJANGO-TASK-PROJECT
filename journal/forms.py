@@ -12,7 +12,7 @@ from django.contrib.auth.forms import AuthenticationForm
 
 from django.forms.widgets import PasswordInput, TextInput
 
-from . models import Thought
+from . models import Thought, Profile
 
 class CreateUserForm(UserCreationForm):
     class Meta:
@@ -53,7 +53,14 @@ class UpdateUserForm(forms.ModelForm):
 
 
 
+class UpdateProfileForm(forms.ModelForm):
 
+    profile_pic = forms.ImageField(widget=forms.FileInput(attrs={"class": "form-control-file"}))
+
+
+    class Meta:
+        model = Profile
+        fields = ["profile_pic"]
 
 
 
