@@ -1,8 +1,4 @@
-from django.forms import ModelForm
-
-
 from django.contrib.auth.forms import UserCreationForm
-
 
 from django.contrib.auth.models import User
 
@@ -14,16 +10,27 @@ from django.forms.widgets import PasswordInput, TextInput
 
 from . models import Thought, Profile
 
+
+
+
+# - Create User Form
+
 class CreateUserForm(UserCreationForm):
     class Meta:
         model = User
         fields = ["username", "email", "password1", "password2"]
 
 
+
+# - Login User Form (login a user)
+
 class LoginForm(AuthenticationForm):
     username = forms.CharField(widget=TextInput())
     password = forms.CharField(widget=PasswordInput())
 
+
+
+# - Post a thought 
 
 
 class ThoughtPostForm(forms.ModelForm):
@@ -33,6 +40,7 @@ class ThoughtPostForm(forms.ModelForm):
         exclude = ["user"]
 
 
+# - Update a thought 
 
 class ThoughtUpdateForm(forms.ModelForm):
      class Meta:
@@ -41,6 +49,7 @@ class ThoughtUpdateForm(forms.ModelForm):
         exclude = ["user"]
 
 
+# - Update User Form  
 
 class UpdateUserForm(forms.ModelForm):
 
@@ -52,7 +61,7 @@ class UpdateUserForm(forms.ModelForm):
 
 
 
-
+# Update your profile picture
 class UpdateProfileForm(forms.ModelForm):
 
     profile_pic = forms.ImageField(widget=forms.FileInput(attrs={"class": "form-control-file"}))
