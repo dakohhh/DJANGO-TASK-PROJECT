@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+{% load static %}
+{% load crispy_forms_tags %}
+<html>
+    <head>
+        <title>WT | My Thoughts</title>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+        <link rel="stylesheet" type="text/css" href="{% static 'css/mdb.min.css' %}">
+
+        <style>
+            .form-layout{
+              width: 500px;  
+              border-radius: 10px;  
+            }
+
+            .message-text{
+
+                color: white;
+            }
+
+        </style>
+
+        {% include 'base.html' %} 
+    </head>
+
+<body>
+
+                
+        
+    {% for th in thought %}
+
+    <div class="container bg-white shadow-md p-5 form-layout" style="margin-top:20px;">
+
+
+        {{ th.title }}
+        <br>
+        {{ th.content }}
+        
+        <br>
+        <a href=" {% url 'update_thoght' th.id %} " class="btn btn-outline-primary" type="submit">Update</a>
+        <a href=" {% url 'delete_thoght' th.id %} " class="btn btn-outline-danger" type="submit">Delete</a>
+    </div>
+
+    {% endfor %}
+
+        
+
+</body>
+
+</html>

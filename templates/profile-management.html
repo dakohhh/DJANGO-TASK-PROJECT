@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+{% load static %}
+{% load crispy_forms_tags %}
+<html>
+    <head>
+        <title>WT | Profile Management</title>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+        <link rel="stylesheet" type="text/css" href="{% static 'css/mdb.min.css' %}">
+
+        <style>
+            .form-layout{
+              width: 500px;  
+              border-radius: 10px;  
+            }
+
+            .message-text{
+
+                color: white;
+            }
+
+        </style>
+
+        
+        {% include 'base.html' %} 
+
+    </head>
+
+<div class="container bg-white shadow-md p-5 form-layout">
+            
+    <form method="POST" autocomplete="off">
+
+        {% csrf_token %}
+
+        <br><br>
+        {{ form|crispy }}
+
+        <button type="submit" class="btn btn-success btn-lg">Update Profile</button>
+    </form>
+    <br>
+</div>
+
+<br>
+<div class="container bg-white shadow-md p-5 form-layout">
+            
+    <form method="POST" autocomplete="off" enctype="multipart/form-data">
+
+        {% csrf_token %}
+
+        <br><br>
+        {{ form2|crispy }}
+
+        <button type="submit" class="btn btn-success btn-lg">Update Profile</button>
+    </form>
+    <br>
+</div>
+
+
+
+<br>
+<div class="container bg-white shadow-md p-5 form-layout">
+
+    <p>Mange your Profile and settings: For instance you may want to
+        <strong>Delete your account</strong>
+    </p>
+
+    <a href=" {% url 'delete_account' %} " class="btn btn-outline-danger" type="submit">Delete Your account</a>
+</div>
+
+</body>
+
+</html>

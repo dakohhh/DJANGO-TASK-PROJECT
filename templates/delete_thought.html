@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+{% load static %}
+{% load crispy_forms_tags %}
+<html>
+    <head>
+        <title>WT |Delete Thought</title>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+        <link rel="stylesheet" type="text/css" href="{% static 'css/mdb.min.css' %}">
+
+        <style>
+            .form-layout{
+              width: 500px;  
+              border-radius: 10px;  
+            }
+
+            .message-text{
+
+                color: white;
+            }
+
+        </style>
+
+        
+        {% include 'base.html' %} 
+
+
+
+
+
+    </head>
+
+<div class="container bg-white shadow-md p-5 form-layout">
+            
+    <form method="POST" autocomplete="off">
+        {% csrf_token %}
+        
+        <p> Are you sure you want to delete your thought? </p>
+
+        <a href=" {% url 'my_thought' %} " class="btn btn-primary">Go Back</a>
+
+        <button type="submit" class="btn btn-danger">DELETE</button>
+    </form>
+    <br>
+
+    
+
+
+</div>

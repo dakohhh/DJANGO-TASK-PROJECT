@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+{% load static %}
+{% load crispy_forms_tags %}
+<html>
+    <head>
+        <title>WT | Register</title>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+        <link rel="stylesheet" type="text/css" href="{% static 'css/mdb.min.css' %}">
+
+        <style>
+            .form-layout{
+              width: 500px;  
+              border-radius: 10px;  
+            }
+
+        </style>
+
+    </head>
+
+
+
+    <body>
+
+        <div class="container bg-white shadow-md p-5 form-layout">
+            
+            <form method="POST" autocomplete="off">
+
+                {% csrf_token %}
+
+                <h3>Create your account</h3>
+
+                <h5>Share your thoughts today</h5>
+                <br><br>
+                {{ form|crispy }}
+
+                <button type="submit" class="btn btn-success btn-lg">&nbsp; Create Account</button>
+            </form>
+
+            <br>
+
+            <div class="text-center">
+                <p> Already have an account? </p> <a href="{% url 'login' %}">Login</a>
+            </div>
+
+        
+        
+        </div>
+    
+    <body>
+    <script src="{% static 'js/mdb.min.js' %}"></script>
+    
+
+</html>

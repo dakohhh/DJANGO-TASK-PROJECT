@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+
+{% load static %}
+<html>
+    <head>
+        <title>WT | DashBorad</title>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+        <link rel="stylesheet" type="text/css" href="{% static 'css/mdb.min.css' %}">
+
+        <style>
+            .form-layout{
+              width: 500px;  
+              border-radius: 10px;  
+            }
+
+        </style>
+
+        {% include 'base.html' %}
+
+    </head>
+
+
+
+    <body>
+
+        <div class="container bg-white shadow-md p-5 form-layout">
+            <h3>Welcome to your dashboard, {{ user }}</h3>
+
+            <br>
+
+            
+
+            <img src="{% static '' %}{{ profile_pic.profile_pic }}" >
+           
+            <a href="{% url 'logout' %}">Logout</a>
+            
+ 
+                
+        </div>
+        <br>
+        <div class="container bg-white shadow-md p-5 form-layout">
+            <p>Mange your Profile and settings: For instance you may want to upload a
+                <strong>profile picture</strong>
+            </p>
+
+            <a href=" {% url 'profile_management' %} " class="btn btn-outline-success" type="submit">Profile Management</a>
+
+
+
+
+        </div>
+
+    
+    <body>
+    <script src="{% static 'js/mdb.min.js' %}"></script>
+    
+
+</html>

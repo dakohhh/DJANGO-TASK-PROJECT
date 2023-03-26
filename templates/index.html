@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+    <head>
+
+        <title>Wisdom Thought</title>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+        <link rel="stylesheet" type="text/css" href="{% static 'css/mdb.min.css' %}">
+
+
+        <nav class="navbar navbar-expand-lg bg-body-tertiary navbar-toggler navbar-collapse ">
+            <div class="container-fluid">
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+                <a class="navbar-brand" href="#" style="color: black;"><strong>Wisdom Thought</strong></a>
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 j ">
+
+                </ul>
+                <div class="d-flex" role="search">
+                  <a href=" {% url 'register' %} " class="btn btn-outline-success" type="submit">Register</a>
+                  &nbsp; &nbsp;
+                  <a href=" {% url 'login' %} " class="btn btn-outline-success" type="submit">Login</a>
+                </div>
+              </div>
+            </div>
+        </nav>
+
+    </head>
+    
+    <h3>Home Page</h3>
+
+
+    <p>This is the home page</p>
+
+
+    <br>
+
+    <script src="{% static 'js/mdb.min.js' %}"></script>
+    
+
+</html>
